@@ -1,11 +1,11 @@
 package com.university.student.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.Map;
 
 @Entity
 @Table(schema = "mark")
@@ -20,7 +20,8 @@ public class SemesterMark {
     private String semester;
     private Float mark;
     private String subject;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = true)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 }

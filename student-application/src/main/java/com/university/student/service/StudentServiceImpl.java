@@ -1,15 +1,21 @@
 package com.university.student.service;
 
+import com.university.student.exception.IdAlreadyPresentException;
 import com.university.student.exception.StudentNotFoundException;
+import com.university.student.model.SemesterMark;
 import com.university.student.model.Student;
 import com.university.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 import static com.university.student.constant.StudentConstant.*;
 
+@Service
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
@@ -22,8 +28,14 @@ public class StudentServiceImpl implements StudentService {
         return student.get();
     }
 
+    public List<Student> getAllStudentsDetails(){
+        return studentRepository.findAll();
+    }
+
     @Transactional
-    public String saveStudent(Student student){
+    public String saveStudent(Student student) throws IdAlreadyPresentException {
+        if (!isStudentPresent(student.getId()))
+            throw new IdAlreadyPresentException("Id is already present");
         studentRepository.save(student);
         return SAVED;
     }
@@ -43,11 +55,23 @@ public class StudentServiceImpl implements StudentService {
        studentRepository.deleteById(id);
        return DELETED;
     }
+
+    @Transactional
+    public String saveMark(String id, List<SemesterMark> marks) throws StudentNotFoundException, IdAlreadyPresentException {
+        Student student = getStudentDetail(id);
+        student.setSemesterMarks(marks);
+        updateStudent(student);
+        return SAVED;
+    }
+
+    public List<SemesterMark> getMark(String id) throws StudentNotFoundException {
+        return getStudentDetail(id).getSemesterMarks();
+    }
     
 
     private boolean isStudentPresent(String id){
         Optional<Student> studentOp = studentRepository.findById(id);
-        return !studentOp.isPresent();
+        return studentOp.isEmpty();
     }
 
 
