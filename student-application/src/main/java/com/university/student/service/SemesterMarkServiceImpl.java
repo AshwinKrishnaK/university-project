@@ -4,7 +4,6 @@ import com.university.student.exception.IdAlreadyPresentException;
 import com.university.student.exception.StudentNotFoundException;
 import com.university.student.model.SemesterMark;
 import com.university.student.model.Student;
-import com.university.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class SemesterMarkServiceImpl implements SemesterMarkService{
     }
 
     public String addMark(String id, List<SemesterMark> marks) throws StudentNotFoundException, IdAlreadyPresentException {
-        Student student = studentService.getStudentDetail(id);
+        var student = studentService.getStudentDetail(id);
         List<SemesterMark> markList = student.getSemesterMarks();
         for (SemesterMark semesterMark: marks){
             semesterMark.setStudent(student);
