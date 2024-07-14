@@ -3,7 +3,6 @@ package com.university.student.service;
 import com.university.student.exception.IdAlreadyPresentException;
 import com.university.student.exception.StudentNotFoundException;
 import com.university.student.model.SemesterMark;
-import com.university.student.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
