@@ -32,7 +32,7 @@ public class MarkController {
 
     @PostMapping("/{id}")
     public ResponseEntity<Response> saveMark(@PathVariable("id") String id,
-                                            @RequestBody List<SemesterMark> semMark) throws StudentNotFoundException, IdAlreadyPresentException {
+                                             @RequestBody List<SemesterMark> semMark) throws StudentNotFoundException, IdAlreadyPresentException {
         return ResponseEntity.ok(new Response(semesterMarkService.addMark(id, semMark),SUCCESS));
     }
 

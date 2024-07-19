@@ -37,6 +37,15 @@ public interface StudentService {
     public String saveStudent(Student student) throws IdAlreadyPresentException;
 
     /**
+     * Saves the details of list of student.
+     *
+     * @param list of student the {@link Student} object containing the list of student's details to be saved
+     * @return a {@link String} indicating the outcome or success message of the save operation
+     * @throws IdAlreadyPresentException if a student with the same ID already exists
+     */
+    public String saveStudent(List<Student> student) throws IdAlreadyPresentException;
+
+    /**
      * Updates the details of an existing student.
      *
      * @param student the {@link Student} object containing the updated details of the student

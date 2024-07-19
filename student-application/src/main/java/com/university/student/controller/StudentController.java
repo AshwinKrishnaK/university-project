@@ -5,6 +5,7 @@ import com.university.student.exception.StudentNotFoundException;
 import com.university.student.model.Response;
 import com.university.student.model.Student;
 import com.university.student.service.StudentServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class StudentController {
     private StudentServiceImpl studentService;
 
     @PostMapping("/")
-    public ResponseEntity<Response> saveStudent(@RequestBody Student student) throws IdAlreadyPresentException {
+    public ResponseEntity<Response> saveStudent(@Valid @RequestBody Student student) throws IdAlreadyPresentException {
         return ResponseEntity.ok(new Response(studentService.saveStudent(student),SUCCESS));
     }
 

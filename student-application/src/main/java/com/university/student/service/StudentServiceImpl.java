@@ -41,6 +41,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Transactional
+    public String saveStudent(List<Student> students) {
+        studentRepository.saveAll(students);
+        return SAVED;
+    }
+
+    @Transactional
     public String updateStudent(Student student) throws StudentNotFoundException {
         if(isStudentPresent(student.getId()))
             throw new StudentNotFoundException(STUDENT_IS_NOT_FOUND);
