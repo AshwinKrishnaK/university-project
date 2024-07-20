@@ -13,4 +13,5 @@ public class SecurityConfig{
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.csrf(AbstractHttpConfigurer::disable).build();
     }
+
 }
