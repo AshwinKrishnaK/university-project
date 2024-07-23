@@ -1,5 +1,6 @@
 package com.university.student.service;
 
+import com.university.student.annotation.LogAspect;
 import com.university.student.exception.IdAlreadyPresentException;
 import com.university.student.exception.StudentNotFoundException;
 import com.university.student.model.SemesterMark;
@@ -23,7 +24,7 @@ public class StudentServiceImpl implements StudentService {
 
     public Student getStudentDetail(String id) throws StudentNotFoundException {
         Optional<Student> student = studentRepository.findById(id);
-        if(!student.isPresent())
+        if(student.isEmpty())
             throw new StudentNotFoundException(STUDENT_IS_NOT_FOUND);
         return student.get();
     }
@@ -40,6 +41,7 @@ public class StudentServiceImpl implements StudentService {
         return SAVED;
     }
 
+    @LogAspect
     @Transactional
     public String saveStudent(List<Student> students) {
         studentRepository.saveAll(students);
