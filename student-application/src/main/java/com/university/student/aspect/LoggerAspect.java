@@ -51,9 +51,9 @@ public class LoggerAspect {
         log.error("Exception thrown in {} method and exception is {}", joinPoint.getSignature().toString(), ex.getMessage());
     }
 
-//    @AfterReturning(value = "execution(* com.university.student.service.*.*(..))",returning = "returnValue")
-//    public void logReturning(JoinPoint joinPoint, Object returnValue){
-//        log.info("{} Method is successfully completed and Returning value is {}", joinPoint.getSignature(), returnValue.toString());
-//    }
+    @AfterReturning(value = "execution(* com.university.student.service.*.*(..))",returning = "returnValue")
+    public void logReturning(JoinPoint joinPoint, Object returnValue){
+        log.info("{} Method is successfully completed and Returning value is {}", joinPoint.getSignature(), returnValue);
+    }
 
 }
